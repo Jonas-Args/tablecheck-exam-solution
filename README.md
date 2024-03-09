@@ -33,10 +33,17 @@ The setups steps expect following tools installed on the system.
 ##### 1. Check out the repository
 
 ```bash
-git clone git@github.com:organization/project-name.git
+git clone git@github.com:Jonas-Args/tablecheck-exam-solution.git
+cd tablecheck-exam-solution
 ```
 
-##### 4. Start the Rails server
+##### 2. Install the gems required by the application:
+
+```bash
+bundle
+```
+
+##### 3. Start the Rails server
 
 You can start the rails server using the command given below.
 
@@ -45,26 +52,30 @@ bundle exec rails s
 ```
 
 With OpenTelemetry tracing in the console
+
 ```ruby
 env OTEL_TRACES_EXPORTER=console rails server
 ```
 
-And now you can visit the site with the URL http://localhost:3000
+And now you can visit the site to get weather with the URL http://localhost:3000/api/v1/weather?city=Tokyo
 
 ## OpenTelemetry Custom Attributes
-| Key   | Description                              
-| -------- | ----------------------------------------
-| `response_time` | The amount of time to finish a single request. We can use this to get the average response time within a period of time.
-| `controller`    | The controller where the request is made. 
-| `action`        | The action executed by the request. We can combine this with the controller key to get weather data requests per minute.
+
+| Key             | Description                                                                                                              |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `response_time` | The amount of time to finish a single request. We can use this to get the average response time within a period of time. |
+| `controller`    | The controller where the request is made.                                                                                |
+| `action`        | The action executed by the request. We can combine this with the controller key to get weather data requests per minute. |
 
 ## Weather API Endpoints
-| Method   | URL                                      | Description                              |
-| -------- | ---------------------------------------- | ---------------------------------------- |
-| `GET`    | `/api/v1/weather?city=Tokyo`                             | Retrieve current weather from a given city. Sample city here is Tokyo                      |
+
+| Method | URL                          | Description                                                           |
+| ------ | ---------------------------- | --------------------------------------------------------------------- |
+| `GET`  | `/api/v1/weather?city=Tokyo` | Retrieve current weather from a given city. Sample city here is Tokyo |
 
 ### Get Weather
-> https://localhost:3000/api/v1/weather?city=Tokyo
+
+> http://localhost:3000/api/v1/weather?city=Tokyo
 
 ### Rest API Success Responses
 
@@ -122,7 +133,7 @@ And now you can visit the site with the URL http://localhost:3000
 ```javascript
     HTTP/1.1  422
     Content-Type: application/json
- 
+
     {
       "error": "Missing city params"
     }
@@ -131,14 +142,15 @@ And now you can visit the site with the URL http://localhost:3000
 ```javascript
     HTTP/1.1  422
     Content-Type: application/json
- 
+
     {
       "error": "Failed to retrieve weather data"
     }
 ```
 
 ## Upcoming Features:
+
 - Historical Weather Data
-   - This allows access to historical weather data by passing a time range to the API. This feature can help users with research, trend analysis, and historical weather identification.
+  - This allows access to historical weather data by passing a time range to the API. This feature can help users with research, trend analysis, and historical weather identification.
 - Geolocation and Reverse Geolocation
   - Right now, we only support weather retrieval using city names. In the next version, we will be allowing users to retrieve weather information based on geolocation coordinates.
