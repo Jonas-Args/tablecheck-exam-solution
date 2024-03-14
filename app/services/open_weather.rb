@@ -24,6 +24,6 @@ class OpenWeather
   end
 
   def api_key
-    ENV['API_KEY'] || 'fbed511a2afc2082d7d5823337173c6e'
+    ENV['API_KEY']
   end
 end
